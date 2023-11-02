@@ -39,35 +39,16 @@ $hr-border-color: #BBBBBB !default;
 
 .page-header {
   width: auto;
-  height: 100%;
+  height: auto;
   padding: 0px;
   background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/assets/img/HEADER.png);
   background-size: 100% 100%;
 }
 
-.row .header-left {
-  position: absolute;
-  width: 100%;
-  align-items: center;
-  vertical-align: middle;
-}
-
-.header-right {
-  float: right;
-  width: 30%;
-}
-
 .page-header .logo {
-  width: 100%;
+  width: auto;
   height: auto;
   padding: 0px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-  padding-top: 0px;
 }
 
 .btn:hover {
