@@ -46,7 +46,7 @@ $hr-border-color: #BBBBBB !default;
   background-size: cover;
 }
 
-.htlm {
+.main-content {
   width: 100%;
   margin: 0 auto;
   margin-left: 0;
@@ -54,15 +54,7 @@ $hr-border-color: #BBBBBB !default;
   padding: 0px;
 }
 
-.main-content {
-  width: 200%;
-  margin: 0 auto;
-  margin-left: 0;
-  margin-right: 0;
-  padding: 0px;
-}
-
-.main-content .button {
+.button {
 color: #FFFFFF;
 border-color: #F01974;
 background-color: #F01974;
@@ -79,7 +71,7 @@ float: left; /* Float the buttons side by side */
 padding: 50px;
 }
 
-.main-content .button:after {
+.button:after {
   width: 100%;
   content: "";
   clear: both;
