@@ -48,7 +48,6 @@ $hr-border-color: #BBBBBB !default;
 
 .main-content {
   margin: 0;
-  width: 200%;
 }
 
 .main-content .button {
@@ -63,6 +62,7 @@ text-align: center;
 vertical-align: middle;
 height: 500px;
 width: 33%;
+float: left; /* Float the buttons side by side */
 }
 
 .main-content .button:after {
