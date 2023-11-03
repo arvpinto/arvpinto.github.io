@@ -39,14 +39,14 @@ $hr-border-color: #BBBBBB !default;
 }
 
 .page-header {
-  width: auto;
+  width: 100%;
   height: 200px;
   padding: 0px;
   background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/assets/img/HEADER.png);
   background-size: cover;
 }
 
-.body {
+.htlm {
   width: 100%;
   margin: 0 auto;
   margin-left: 0;
@@ -80,6 +80,7 @@ padding: 50px;
 }
 
 .main-content .button:after {
+  width: 100%;
   content: "";
   clear: both;
   display: table;
