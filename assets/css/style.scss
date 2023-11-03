@@ -46,28 +46,26 @@ $hr-border-color: #BBBBBB !default;
   background-size: cover;
 }
 
-.main-content {
-  margin: 0;
-  width: 200%;
+.button:hover {
+color: #F01974;
+text-decoration: none;
+background-color: rgba(255,255,255,0.4);
+border-color: #F01974;
+font-size: 80%;
+height: 20%;
+border-radius: 20px;
+width: 13%;
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.main-content .button {
+.button {
 color: #FFFFFF;
 border-color: #F01974;
 background-color: #F01974;
-font-size: 100%;
+font-size: 80%;
+height: 20%;
 border-radius: 20px;
+width: 13%;
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 opacity: 0.7;
-text-align: center;
-vertical-align: middle;
-height: 500px;
-width: 33%;
-float: left; /* Float the buttons side by side */
-}
-
-.main-content .button:after {
-  content: "";
-  clear: both;
-  display: table;
 }
