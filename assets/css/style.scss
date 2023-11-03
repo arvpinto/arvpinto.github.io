@@ -61,6 +61,7 @@ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 opacity: 0.7;
 text-align: center;
 height: 500px;
+width: 25%;
 float: left; /* Float the buttons side by side */
 }
 
@@ -68,10 +69,4 @@ float: left; /* Float the buttons side by side */
   content: "";
   clear: both;
   display: table;
-}
-
-.site-footer {
-  height: auto;
-  width: auto;
-  background-image: linear-gradient(to top, #272727 0%, #FFFFFF 100%);
 }
