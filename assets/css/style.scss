@@ -50,15 +50,6 @@ $hr-border-color: #BBBBBB !default;
   width: 100%;
 }
 
-#button1 {
-    width: 33%;
-    height: 500px;
-    background-image: url(https://arvpinto.github.io/dynamic_qmmm_cp2k/assets/img/US_TUTORIAL.png);
-    background-size: cover;
-    background-position: center;
-    opacity: 50%;
-}
-
 .button {
 color: #FFFFFF;
 border-color: #F01974;
@@ -92,6 +83,16 @@ width: 33%;
 float: left; /* Float the buttons side by side */
 padding: 50px;
 }
+
+#button1 {
+    width: 33%;
+    height: 500px;
+    background-image: url(https://arvpinto.github.io/dynamic_qmmm_cp2k/assets/img/US_TUTORIAL.png);
+    background-size: cover;
+    background-position: center;
+    opacity: 50%;
+}
+
 
 .button:after {
   width: 200%;
