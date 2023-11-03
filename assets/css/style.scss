@@ -35,6 +35,7 @@ $hr-border-color: #BBBBBB !default;
   padding-top: 0px;
   padding-bottom: 0px;
   text-shadow: 0 0 3px #272727, 0 0 5px #272727;
+  vertical-align: middle;
 }
 
 .page-header {
@@ -72,7 +73,7 @@ flex: 25%;
 }
 
 .row {
-  display: flex;
+  column-count: 4;
 }
 
 
