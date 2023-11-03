@@ -51,7 +51,7 @@ $hr-border-color: #BBBBBB !default;
   height: auto;
 }
 
-.btn-group button {
+.button {
 color: #FFFFFF;
 border-color: #F01974;
 background-color: #F01974;
@@ -63,21 +63,11 @@ text-align: center;
 float: left; /* Float the buttons side by side */
 }
 
-.btn-group:after {
+.button:after {
   content: "";
   clear: both;
   display: table;
 }
-
-/* Add a background color on hover */
-.btn-group button:hover {
-color: #F01974;
-text-decoration: none;
-background-color: rgba(255,255,255,0.4);
-border-color: #F01974;
-}
-
-
 
 .site-footer {
   height: auto;
