@@ -52,19 +52,17 @@ $hr-border-color: #BBBBBB !default;
 }
 
 .btn-group button {
-  background-color: #04AA6D; /* Green background */
-  border: 1px solid green; /* Green border */
-  color: white; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  float: left; /* Float the buttons side by side */
+color: #FFFFFF;
+border-color: #F01974;
+background-color: #F01974;
+font-size: 100%;
+border-radius: 20px;
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+opacity: 0.7;
+text-align: center;
+float: left; /* Float the buttons side by side */
 }
 
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
-
-/* Clear floats (clearfix hack) */
 .btn-group:after {
   content: "";
   clear: both;
@@ -73,7 +71,10 @@ $hr-border-color: #BBBBBB !default;
 
 /* Add a background color on hover */
 .btn-group button:hover {
-  background-color: #3e8e41;
+color: #F01974;
+text-decoration: none;
+background-color: rgba(255,255,255,0.4);
+border-color: #F01974;
 }
 
 
