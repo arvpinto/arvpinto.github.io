@@ -54,8 +54,9 @@ border-color: #F01974;
 font-size: 150%;
 height: auto;
 border-radius: 20px;
-width: 13%;
+width: 25%;
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+float: left;
 }
 
 .btn {
@@ -65,15 +66,17 @@ background-color: #F01974;
 font-size: 150%;
 height: auto;
 border-radius: 20px;
-width: 13%;
+width: 25%;
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 opacity: 0.7;
+float: left;
 }
 
-.row {
-  column-count: 4;
+.row:after {
+content: "";
+display: table;
+clear: both;
 }
-
 
 .site-footer {
   height: auto;
