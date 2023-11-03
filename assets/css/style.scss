@@ -50,7 +50,7 @@ $hr-border-color: #BBBBBB !default;
   width: 100%; 
 }
 
-.btn:hover {
+.body .btn:hover {
 color: #F01974;
 text-decoration: none;
 background-color: rgba(255,255,255,0.4);
@@ -64,7 +64,7 @@ text-align: center;
 float: left;
 }
 
-.btn {
+.body .btn {
 color: #FFFFFF;
 border-color: #F01974;
 background-color: #F01974;
