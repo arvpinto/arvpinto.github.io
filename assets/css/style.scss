@@ -69,5 +69,5 @@ float: left; /* Float the buttons side by side */
 .button:after {
   content: "";
   clear: both;
-  display: table;
+  display: flex;
 }
