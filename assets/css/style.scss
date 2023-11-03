@@ -51,7 +51,7 @@ $hr-border-color: #BBBBBB !default;
   width: 200%;
 }
 
-.button {
+.main-content .button {
 color: #FFFFFF;
 border-color: #F01974;
 background-color: #F01974;
@@ -66,8 +66,8 @@ width: 33%;
 float: left; /* Float the buttons side by side */
 }
 
-.button:after {
+.main-content .button:after {
   content: "";
   clear: both;
-  display: flex;
+  display: table;
 }
