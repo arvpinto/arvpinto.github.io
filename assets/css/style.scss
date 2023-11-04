@@ -103,11 +103,3 @@ padding: 50px;
     background-size: cover;
     background-position: center;
 }
-
-.button:after {
-  width: 200%;
-  content: "";
-  clear: both;
-  display: table;
-  align-items: center;
-}
