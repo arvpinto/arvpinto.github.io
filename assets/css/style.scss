@@ -59,6 +59,7 @@ text-align: center;
 align-items: center;
 height: 500px;
 width: 20%;
+float: left; /* Float the buttons side by side */
 padding: 50px;
 }
 
@@ -75,6 +76,7 @@ text-align: center;
 align-items: center;
 height: 500px;
 width: 20%;
+float: left; /* Float the buttons side by side */
 padding: 50px;
 }
 
@@ -100,4 +102,12 @@ padding: 50px;
     background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/artwork/GO_ARCHIVE.png);
     background-size: cover;
     background-position: center;
+}
+
+.button:after {
+  width: 200%;
+  content: "";
+  clear: both;
+  display: table;
+  align-items: center;
 }
