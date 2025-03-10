@@ -13,7 +13,7 @@ $header-bg-color-secondary: #6676FC;
 // Text
 $section-headings-color: #6676FC;
 $body-text-color: #272727 !default;
-$body-link-color: #F01974 !default;
+$body-link-color: #FF4545 !default;
 $blockquote-text-color: #6676FC !default;
 
 // Code
@@ -86,7 +86,7 @@ padding: 50px;
 .button:hover {
 color: #272727;
 text-decoration: none;
-border-color: #F01974;
+border-color: #FF4545;
 background-color: rgba(255,255,255,0.4);
 font-size: 120%;
 border-radius: 20px;
