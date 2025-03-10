@@ -54,6 +54,17 @@ $hr-border-color: #BBBBBB !default;
   background-size: cover;
 }
 
+.github-button {
+    position: absolute;
+    left: 0;
+    margin-left: 20px; /* Adjust spacing */
+}
+
+.github-button img {
+    width: 40px; /* Adjust size */
+    height: 40px;
+}
+
 .button {
 color: #FFFFFF;
 border-color: #F01974;
