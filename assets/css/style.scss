@@ -28,6 +28,10 @@ $hr-border-color: #BBBBBB !default;
 
 @import "{{ site.theme }}";
 
+.body {
+    background-color: #000000;
+}
+
 .project-name {
   width: auto;
   text-align: center;
