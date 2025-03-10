@@ -30,6 +30,14 @@ $hr-border-color: #BBBBBB !default;
 
 body {
     background-color: #000000;
+    background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/assets/img/HEADER.png);
+    background-size: cover;
+    background-position: top center; /* Aligns the image at the top */
+    background-attachment: fixed; /* Fixes the image in place when scrolling */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100%; /* Ensure the body takes up the full viewport height */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
 }
 
 .project-name {
@@ -54,8 +62,6 @@ body {
   width: 100%;
   height: auto;
   padding: 0px;
-  background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/assets/img/HEADER.png);
-  background-size: cover;
 }
 
 .github-button {
