@@ -7,7 +7,7 @@ $medium-breakpoint: 42em !default;
 
 // Headers
 $header-heading-color: #FFFFFF !default;
-$header-bg-color: #FFFFFF;
+$header-bg-color: #000000;
 $header-bg-color-secondary: #6676FC;
 
 // Text
@@ -69,7 +69,7 @@ $hr-border-color: #BBBBBB !default;
 .button {
 color: #FFFFFF;
 border-color: #FF4545;
-background-color: rgba(255,255,255,0.4);
+background-color: #000000;
 font-size: 120%;
 border-radius: 20px;
 text-shadow: 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727, 0 0 10px #272727;
@@ -87,7 +87,7 @@ padding: 50px;
 color: #272727;
 text-decoration: none;
 border-color: #FF4545;
-background-color: rgba(255,255,255,0.4);
+background-color: #000000;
 font-size: 120%;
 border-radius: 20px;
 text-shadow: 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545, 0 0 10px #FF4545;
