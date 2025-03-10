@@ -77,6 +77,7 @@ box-shadow: 0 16px 32px 0 rgba(0,0,0,0.6), 0 12px 40px 0 rgba(0,0,0,0.19);
 opacity: 0.7;
 text-align: center;
 align-items: center;
+justify-content: center; 
 height: 500px;
 width: 20%;
 float: left; /* Float the buttons side by side */
@@ -93,10 +94,10 @@ text-shadow: 0 0 8px #F01974, 0 0 10px #F01974, 0 0 2px #F01974, 0 0 2px #F01974
 box-shadow: 0 16px 32px 0 rgba(0,0,0,0.6), 0 12px 40px 0 rgba(0,0,0,0.19);
 text-align: center;
 align-items: center;
+justify-content: center; 
 height: 500px;
 width: 20%;
 float: left; /* Float the buttons side by side */
-padding: 50px;
 }
 
 #button1 {
