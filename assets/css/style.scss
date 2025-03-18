@@ -65,15 +65,14 @@ body {
 }
 
 .github-button {
-    position: absolute;
-    right: 0;
-    top: 25%;
-    margin-right: 50px; /* Adjust spacing */
+  position: absolute; /* Positioned relative to its normal position */
+  top: 50px; /* Moves the element down 10px */
+  right: 50px;
 }
 
 .github-button img {
-    width: 100px; /* Adjust size */
-    height: 100px;
+    width: 50px; /* Adjust size */
+    height: 50px;
 }
 
 .button {
@@ -121,7 +120,7 @@ padding: 50px;
 
 #button2 {
     width: 20%;
-    height: 400px;
+    height: 600px;
     background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/artwork/CP2K_PREP_QMMM.png);
     background-size: cover;
     background-position: center;
@@ -129,7 +128,7 @@ padding: 50px;
 
 #button3 {
     width: 20%;
-    height: 400px;
+    height: 600px;
     background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/artwork/CP2K_TUTORIAL_NEB.png);
     background-size: cover;
     background-position: center;
@@ -137,7 +136,7 @@ padding: 50px;
 
 #button4 {
     width: 20%;
-    height: 400px;
+    height: 600px;
     background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/artwork/CP2K_TUTORIAL_US.png);
     background-size: cover;
     background-position: center;
@@ -145,7 +144,7 @@ padding: 50px;
 
 #button5 {
     width: 20%;
-    height: 400px;
+    height: 600px;
     background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/artwork/CP2K_DEL_RESIDUES.png);
     background-size: cover;
     background-position: center;
@@ -153,7 +152,7 @@ padding: 50px;
 
 #button6 {
     width: 20%;
-    height: 400px;
+    height: 600px;
     background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/artwork/CP2K_MACRODIPOLE.png);
     background-size: cover;
     background-position: center;
@@ -161,7 +160,7 @@ padding: 50px;
 
 #button7 {
     width: 20%;
-    height: 400px;
+    height: 600px;
     background-image: url(https://raw.githubusercontent.com/arvpinto/arvpinto.github.io/main/artwork/GO_ARCHIVE.png);
     background-size: cover;
     background-position: center;
