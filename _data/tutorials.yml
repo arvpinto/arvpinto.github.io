@@ -1,0 +1,105 @@
+# Every tutorial, archive or app shown on the home page. The order here does
+# not matter: the page sorts by date (newest first) and the newest entry is
+# featured at the top automatically. Fields:
+#
+#   slug:     unique id, used by _data/tracks.yml
+#   title:    card title
+#   text:     one sentence saying what the reader will do or get
+#   category: one id from _data/categories.yml
+#   tools:    software used (each one becomes a filter)
+#   url:      where the card leads
+#   image:    file inside assets/img/cards/ (WebP, about 900 px wide)
+#   alt:      description of the image for screen readers
+#   added:    date the tutorial was published (YYYY-MM-DD); the dates below are
+#             the first commit of each repository. Entries from the last 180
+#             days get a "New" label. Leave it out if unknown.
+
+- slug: go-sheets
+  title: Graphene oxide structures
+  text: GAFF2-AIM graphene oxide sheet models in GROMACS format, from the J. Phys. Chem. B 2022 study on biomolecule adsorption.
+  category: models
+  tools: [GROMACS, CP2K, Chargemol]
+  url: https://github.com/arvpinto/GO_sheets
+  image: graphene-oxide.webp
+  alt: Graphene oxide sheet in water with a molecule adsorbed on its surface
+  added: 2022-07-06
+
+- slug: static-qmmm
+  title: Static QM/MM
+  text: Locate reactant, transition state and product geometries with the CI-NEB and dimer methods.
+  category: qmmm
+  tools: [CP2K, parmed]
+  url: https://arvpinto.github.io/enzyme_neb_cp2k/
+  image: static-qmmm.webp
+  alt: Protein helices around a bound substrate shown as spheres
+  added: 2023-03-22
+
+# Date unknown (repository not public): please add "added:".
+- slug: dynamic-qmmm
+  title: Dynamic QM/MM
+  text: Run QM/MM molecular dynamics along the reaction coordinate to obtain the free energy profile.
+  category: qmmm
+  tools: [CP2K]
+  url: https://arvpinto.github.io/enzyme_us_cp2k/
+  image: dynamic-qmmm.webp
+  alt: Enzyme in rainbow cartoon with the ligand highlighted in magenta
+
+- slug: residue-deletion
+  title: Per-residue contributions to the barrier
+  text: Delete residues one at a time from the reactant and transition state to measure how each one changes the activation energy.
+  category: qmmm
+  tools: [CP2K, VMD, cpptraj, parmed]
+  url: https://arvpinto.github.io/enzyme_ts_deletion_cp2k/
+  image: residue-deletion.webp
+  alt: Protein surface with acidic and basic residues coloured red and blue
+  added: 2024-06-09
+
+# Date unknown (repository not public): please add "added:".
+- slug: macrodipole
+  title: Transition state macrodipole
+  text: Calculate the dipole moment of the enzyme and how it is oriented relative to the transition state.
+  category: qmmm
+  tools: [CP2K]
+  url: https://arvpinto.github.io/enzyme_ts_macrodipole/
+  image: macrodipole.webp
+  alt: Protein with charged residues and an arrow showing the macrodipole vector
+
+- slug: pca-clustering
+  title: 3D clustering of PCA vectors
+  text: Cluster an MD trajectory on its first three principal components with DBSCAN and Gaussian mixture models, then extract the most representative frames.
+  category: md
+  tools: [GROMACS, Python]
+  url: https://arvpinto.github.io/3D_clustering_PCA/
+  image: pca-clustering.webp
+  alt: Overlaid backbone traces of many trajectory frames in red
+  added: 2025-03-03
+
+- slug: dihedral
+  title: Parameterizing a dihedral angle
+  text: Refit GAFF2 dihedral parameters against a quantum mechanical torsion scan.
+  category: ff
+  tools: [Gaussian, AmberTools, parmed, GROMACS]
+  url: https://arvpinto.github.io/GAFF2_dihedral_parameterization/
+  image: dihedral.webp
+  alt: Torsion energy profile of 1,3-propanediol from -180 to 180 degrees
+  added: 2025-11-10
+
+- slug: compchemkit
+  title: CompChemKit
+  text: An offline Android app for computational chemistry, with a lab notebook, literature hub, HPC workbench, structure studio and paper kit.
+  category: software
+  tools: [Android]
+  url: https://arvpinto.github.io/compchemkit/
+  image: compchemkit.webp
+  alt: Three phone screens of the CompChemKit app
+  added: 2026-09-22
+
+- slug: qmmm-prep
+  title: Preparing a QM/MM system
+  text: Build a QM/MM model of an enzyme-ligand complex, from the PDB structure to a validated set of CP2K inputs.
+  category: qmmm
+  tools: [AmberTools, parmed, VMD, CP2K]
+  url: https://arvpinto.github.io/enzyme_qmmm_prep_cp2k/
+  image: qmmm-prep.webp
+  alt: Enzyme active site with the QM region shown as ball-and-stick inside the protein ribbons
+  added: 2026-10-25

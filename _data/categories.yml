@@ -1,0 +1,29 @@
+# Topics: used for the catalogue filters and the colour of each card.
+# Add a topic here before using its id in tutorials.yml.
+#
+#   id:     short id used in tutorials.yml ("category:")
+#   name:   name shown on the page
+#   color:  accent colour (dots, card highlight); it must read well on black
+#
+# The colours follow the AlphaFold confidence palette (blue, light blue,
+# yellow, orange), with red kept for QM/MM.
+
+- id: qmmm
+  name: QM/MM
+  color: "#ff5257"
+
+- id: md
+  name: Molecular dynamics
+  color: "#4d86ff"
+
+- id: ff
+  name: Force fields
+  color: "#ff7d45"
+
+- id: models
+  name: Models and data
+  color: "#65cbf3"
+
+- id: software
+  name: Software
+  color: "#ffdb13"

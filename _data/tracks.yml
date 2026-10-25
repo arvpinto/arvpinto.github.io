@@ -1,0 +1,13 @@
+# Learning tracks: tutorials meant to be followed in order.
+# "steps" lists slugs from _data/tutorials.yml. Any number of steps works;
+# the track is drawn as a reaction energy profile through them.
+
+- id: qmmm-cp2k
+  title: Enzyme QM/MM with CP2K
+  intro: From a PDB structure to the analysis of the transition state of an enzymatic reaction.
+  steps:
+    - qmmm-prep
+    - static-qmmm
+    - dynamic-qmmm
+    - residue-deletion
+    - macrodipole
