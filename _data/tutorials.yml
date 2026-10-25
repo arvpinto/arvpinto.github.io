@@ -19,7 +19,7 @@
   text: GAFF2-AIM graphene oxide sheet models in GROMACS format, from the J. Phys. Chem. B 2022 study on biomolecule adsorption.
   category: models
   tools: [GROMACS, CP2K, Chargemol]
-  url: https://github.com/arvpinto/GO_sheets
+  url: https://arvpinto.github.io/GO_sheets/
   image: graphene-oxide.webp
   alt: Graphene oxide sheet in water with a molecule adsorbed on its surface
   added: 2022-07-06
