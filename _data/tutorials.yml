@@ -100,6 +100,6 @@
   category: qmmm
   tools: [AmberTools, parmed, VMD, CP2K]
   url: https://arvpinto.github.io/enzyme_qmmm_prep_cp2k/
-  image: CP2K_PREP_TUTORIAL.png
+  image: qmmm-prep.webp
   alt: Enzyme active site with the QM region shown as ball-and-stick inside the protein ribbons
   added: 2026-10-25
