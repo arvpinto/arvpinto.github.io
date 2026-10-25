@@ -1,6 +1,14 @@
-title: Computational Biochemistry Homepage
-show_downloads: true
-google_analytics:
-remote_theme: pages-themes/cayman@v0.2.0
+title: CompBioChem Tutorials
+description: Step-by-step tutorials, scripts and models for enzyme simulations, from classical molecular dynamics to QM/MM reaction mechanisms.
+author: Alexandre V. Pinto
+url: https://arvpinto.github.io
+lang: en
+image: /assets/img/social.jpg
+
+# The home page uses its own layout and stylesheet (no remote theme).
 plugins:
-- jekyll-remote-theme
+  - jekyll-seo-tag
+
+# Original full-size artwork is kept in the repository but not needed by the page.
+exclude:
+  - README.md
