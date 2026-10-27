@@ -103,3 +103,13 @@
   image: qmmm-prep.webp
   alt: Enzyme active site with the QM region shown as ball-and-stick inside the protein ribbons
   added: 2026-10-25
+
+- slug: abcg2-charges
+  title: Conformer-averaged ABCG2 charges
+  text: Average ABCG2 partial charges over the conformers of a flexible molecule until the mean converges, with MHET as the worked example.
+  category: ff
+  tools: [AmberTools, RDKit, Python]
+  url: https://arvpinto.github.io/abcg2_charges_multi/
+  image: abcg2-charges.webp
+  alt: Accepted conformers of MHET overlaid, with atoms coloured from red (negative) to blue (positive) by their ABCG2 charge
+  added: 2026-10-27
