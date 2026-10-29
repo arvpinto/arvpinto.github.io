@@ -113,3 +113,14 @@
   image: abcg2-charges.webp
   alt: Accepted conformers of MHET overlaid, with atoms coloured from red (negative) to blue (positive) by their ABCG2 charge
   added: 2026-10-27
+  
+- slug: pka-comparison
+  title: Comparing protein pKa predictors to assign protonation states
+  text: Run PROPKA3, PypKa, DelPhiPKa, pKAI and pKAI+ on the same protein structure, merge their pKa values into one table and assign protonation states at a target pH by consensus, with hen egg-white lysozyme (4LZT) as the worked example.
+  category: md
+  tools: [PROPKA3, PypKa, DelPhiPKa, pKAI, Python]
+  url: https://arvpinto.github.io/pka_comparison/
+  image: pka-comparison.webp
+  alt: Lysozyme cartoon with the titratable side chains coloured from red (deprotonated) to blue (protonated) by their consensus pKa relative to pH 7, and the disulfide bonds in yellow
+  added: 2026-10-29
+
