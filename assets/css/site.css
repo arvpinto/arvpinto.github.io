@@ -885,10 +885,12 @@ button { cursor: pointer; }
 }
 /* Both lists are as tall as the first row of journal covers. site.js measures
    that row and sets --list-height; the value here is used until it has. */
+/* When a list reaches its end, further scrolling moves the page (no
+   overscroll-behavior: contain, which Chrome on Android applies even to a box
+   with nothing to scroll and which can trap the page there). */
 .scroller {
   height: var(--list-height, 264px);
   overflow-y: auto;
-  overscroll-behavior: contain;
   padding-right: 14px;
   background: var(--bg);
   scrollbar-width: thin;
@@ -1018,8 +1020,9 @@ button { cursor: pointer; }
   .about-art { order: 3; justify-self: center; }
 }
 @media (max-width: 999.98px) {
-  #publications .scroller { height: 300px; }
-  #artwork .scroller { height: auto; padding-right: 0; }
+  /* Phones and tablets: both lists are shown in full, so the page is the
+     only thing that scrolls. */
+  .scroller { height: auto; overflow: visible; padding-right: 0; }
 }
 @media (min-width: 860px) {
   .about-top { grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr); }
