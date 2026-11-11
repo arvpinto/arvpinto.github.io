@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark light">
+    {%- comment -%} Applies the saved light or dark choice before anything is drawn, so the page does not flash. {%- endcomment %}
+    <script>
+      try { if (localStorage.getItem('theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+    </script>
+    <link rel="icon" type="image/svg+xml" href="{{ '/assets/img/favicon.svg' | relative_url }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/hanken-grotesk-latin.woff2' | relative_url }}">
+    <link rel="preload" as="image" href="{{ '/assets/img/hero-1200.webp' | relative_url }}" imagesrcset="{{ '/assets/img/hero-800.webp' | relative_url }} 800w, {{ '/assets/img/hero-1200.webp' | relative_url }} 1200w, {{ '/assets/img/hero-1600.webp' | relative_url }} 1600w" imagesizes="(min-width: 1000px) 640px, min(100vw, 520px)">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css?v=' | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body id="top">
+{%- comment -%} ---------- Numbers computed from _data, so the page grows by itself ---------- {%- endcomment -%}
+{%- assign me = site.data.profile -%}
+{%- assign resources = site.data.resources -%}
+{%- assign cats = site.data.categories -%}
+{%- assign series = site.data.series -%}
+{%- assign gallery = site.data.gallery -%}
+{%- assign total = resources | size -%}
+{%- assign now_s = site.time | date: '%s' | plus: 0 -%}
+{%- assign new_window = 15552000 -%}
+{%- assign all_tools = '' | split: '' -%}
+{%- assign featured = nil -%}
+{%- assign featured_s = 0 -%}
+{%- for r in resources -%}
+  {%- assign all_tools = all_tools | concat: r.tools -%}
+  {%- if r.added -%}
+    {%- assign s = r.added | date: '%s' | plus: 0 -%}
+    {%- if s > featured_s -%}{%- assign featured = r -%}{%- assign featured_s = s -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign all_tools = all_tools | uniq | sort_natural -%}
+{%- comment -%} end of computed values {%- endcomment %}
+
+    <a class="skip" href="#resources">Skip to the portfolio</a>
+
+    <header class="topbar">
+      <nav class="wrap topbar-inner" aria-label="Main">
+        {%- comment -%} Mark: the contour of a free energy surface through its saddle point, as a neon tube (assets/img/logo.svg). {%- endcomment %}
+        <a class="brand" href="#top" aria-label="Back to the top">
+          <img class="brand-mark" src="{{ '/assets/img/logo.svg' | relative_url }}" data-light-src="{{ '/assets/img/logo-light.svg' | relative_url }}" width="78" height="46" alt="">
+        </a>
+        <ul class="nav-links" role="list">
+          <li class="hide-sm"><a href="#resources">Portfolio</a></li>
+          <li class="hide-sm"><a href="#about">About</a></li>
+          <li>
+            {%- comment -%} Light and dark mode. The choice is remembered in this browser (see site.js). {%- endcomment %}
+            <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Light mode" title="Switch to light mode">
+              <svg class="icon-sun" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <svg class="icon-moon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M16.5 12.4A7 7 0 0 1 7.6 3.5a7 7 0 1 0 8.9 8.9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li>
+            <a class="pill pill--light" href="https://github.com/arvpinto?tab=repositories" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {%- comment -%} ---------------------------------------------------------- Hero {%- endcomment %}
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          {%- comment -%} The canvas redraws the lower half of the artwork so that the reflection moves like water (see site.js). {%- endcomment %}
+          <div class="hero-art" id="hero-art">
+            <img src="{{ '/assets/img/hero-1200.webp' | relative_url }}"
+                 srcset="{{ '/assets/img/hero-800.webp' | relative_url }} 800w, {{ '/assets/img/hero-1200.webp' | relative_url }} 1200w, {{ '/assets/img/hero-1600.webp' | relative_url }} 1600w"
+                 data-light-src="{{ '/assets/img/hero-light-1200.webp' | relative_url }}"
+                 data-light-srcset="{{ '/assets/img/hero-light-800.webp' | relative_url }} 800w, {{ '/assets/img/hero-light-1200.webp' | relative_url }} 1200w, {{ '/assets/img/hero-light-1600.webp' | relative_url }} 1600w"
+                 sizes="(min-width: 1000px) 640px, min(100vw, 520px)"
+                 width="1600" height="1640"
+                 alt="Molecular surface of an enzyme, glowing red and blue under a single light, reflected on dark water">
+            <canvas class="hero-water" aria-hidden="true"></canvas>
+            {%- comment -%} Invisible area over the lamp and its beam: hovering it makes the lamp flicker (see site.js). {%- endcomment %}
+            <span class="lamp-spot" aria-hidden="true"></span>
+          </div>
+
+          <div class="hero-text">
+            <h1 id="hero-title">{% for line in me.headline %}<span>{{ line }}</span>{% unless forloop.last %} {% endunless %}{% endfor %}</h1>
+            <p class="lede">{{ me.intro }}</p>
+
+            {%- comment -%} The whole block is one link to the About section. {%- endcomment %}
+            <a class="author" href="#about" aria-label="About {{ me.name }}">
+              <span class="author-name">{{ me.name }}{% if me.degree %}, {{ me.degree }}{% endif %}</span>
+              <span>{{ me.affiliation.group }}, {{ me.affiliation.institute }}</span>
+              <span>{{ me.affiliation.department }}, {{ me.affiliation.faculty }}</span>
+            </a>
+
+            {%- if featured %}
+            {%- assign fc = cats | where: 'id', featured.category | first %}
+            <div class="latest" style="--c: {{ fc.color }}">
+              <img class="latest-thumb" src="{{ '/assets/img/cards/' | append: featured.image | relative_url }}" alt="" width="96" height="72">
+              <span class="latest-body">
+                <span class="latest-label">Latest addition, {{ featured.added | date: '%B %Y' }}</span>
+                <a class="latest-title" href="{{ featured.url }}"{% if featured.url contains 'github.com' %} target="_blank" rel="noopener"{% endif %}>{{ featured.title }}</a>
+                <span class="latest-text">{{ featured.text }}</span>
+              </span>
+            </div>
+            {%- endif %}
+          </div>
+        </div>
+      </section>
+
+      {%- comment -%} ---------------------------------------------------- Catalogue {%- endcomment %}
+      <section class="section catalogue" id="resources" aria-labelledby="resources-title">
+        <span id="catalogue"></span>
+        <div class="wrap section-head">
+          <h2 id="resources-title">{{ me.resources_title }}</h2>
+          <p>{{ me.resources_intro }}</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="wrap toolbar-inner">
+            <label class="search">
+              <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span class="visually-hidden">Search the portfolio</span>
+              <input type="search" id="q" placeholder="Search by method, software or system" autocomplete="off">
+              <kbd class="hide-sm" aria-hidden="true">/</kbd>
+            </label>
+
+            <div class="selects">
+              <label><span class="visually-hidden">Software</span>
+                <select id="tool">
+                  <option value="">All software</option>
+                  {%- for tool in all_tools %}
+                  <option value="{{ tool | downcase }}">{{ tool }}</option>
+                  {%- endfor %}
+                </select>
+              </label>
+              <label><span class="visually-hidden">Sort</span>
+                <select id="sort">
+                  <option value="new">Newest first</option>
+                  <option value="old">Oldest first</option>
+                  <option value="az">A to Z</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="chips" role="group" aria-label="Topic">
+              <button type="button" class="chip" data-cat="all" aria-pressed="true">All <span class="chip-n">{{ total }}</span></button>
+              {%- for c in cats -%}
+              {%- assign n = resources | where: 'category', c.id | size -%}
+              {%- if n > 0 %}
+              <button type="button" class="chip" data-cat="{{ c.id }}" aria-pressed="false" style="--c: {{ c.color }}">{{ c.name }} <span class="chip-n">{{ n }}</span></button>
+              {%- endif -%}
+              {%- endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <p class="result-count" id="result-count" aria-live="polite">Showing all {{ total }} entries</p>
+
+          <ul class="cards" id="cards" role="list">
+            {%- for r in resources -%}
+            {%- assign c = cats | where: 'id', r.category | first -%}
+            {%- assign is_new = false -%}
+            {%- if r.added -%}{%- assign added_s = r.added | date: '%s' | plus: 0 -%}{%- assign age = now_s | minus: added_s -%}{%- if age < new_window -%}{%- assign is_new = true -%}{%- endif -%}{%- endif %}
+            <li class="card" style="--c: {{ c.color }}"
+                data-num="{{ forloop.index }}"
+                data-added="{% if r.added %}{{ r.added | date: '%Y-%m-%d' }}{% endif %}"
+                data-title="{{ r.title | downcase | escape }}"
+                data-cat="{{ r.category }}"
+                data-tools="|{{ r.tools | join: '|' | downcase }}|"
+                data-search="{{ r.title | append: ' ' | append: r.text | append: ' ' | append: c.name | append: ' ' | append: r.tools | join: ' ' | downcase | escape }}">
+              <div class="card-fig">
+                <img src="{{ '/assets/img/cards/' | append: r.image | relative_url }}" alt="{{ r.alt }}" loading="lazy" decoding="async">
+              </div>
+              <div class="card-body">
+                <p class="card-meta">
+                  <span class="card-cat">{{ c.name }}</span>
+                  {%- if is_new %}<span class="tag-new">New</span>{% endif %}
+                </p>
+                <h3><a class="card-link" href="{{ r.url }}"{% if r.url contains 'github.com' %} target="_blank" rel="noopener"{% endif %}>{{ r.title }}</a></h3>
+                <p class="card-text">{{ r.text }}</p>
+                {%- for sr in series -%}
+                {%- for s in sr.steps -%}
+                {%- if s == r.slug %}
+                <p class="card-track">Part {{ forloop.index }} of {{ sr.title }}</p>
+                {%- endif -%}
+                {%- endfor -%}
+                {%- endfor %}
+                <div class="card-foot">
+                  <ul class="tools" role="list" aria-label="Software">
+                    {%- for tool in r.tools %}
+                    <li><button type="button" data-tool="{{ tool | downcase }}" title="Show everything that uses {{ tool }}">{{ tool }}</button></li>
+                    {%- endfor %}
+                  </ul>
+                  {%- if r.added %}<span class="added">{{ r.added | date: '%b %Y' }}</span>{% endif %}
+                </div>
+              </div>
+            </li>
+            {%- endfor %}
+          </ul>
+
+          <div class="more" id="more" hidden>
+            <button type="button" class="pill pill--outline" id="more-btn">Show all entries</button>
+          </div>
+
+          <div class="empty" id="empty" hidden>
+            <p>Nothing matches these filters.</p>
+            <button type="button" class="pill pill--outline" id="clear">Clear filters</button>
+          </div>
+        </div>
+      </section>
+
+      {%- comment -%} ------------------------------------------------------- Series {%- endcomment %}
+      {%- for sr in series %}
+      {%- assign n_steps = sr.steps | size %}
+      <section class="section series" aria-labelledby="series-{{ sr.id }}">
+        <div class="wrap">
+          <h2 id="series-{{ sr.id }}">{{ sr.title }}</h2>
+          {%- comment -%} The energy profile and its travelling light are drawn into this element by site.js. {%- endcomment %}
+          <div class="series-plot" data-steps="{{ n_steps }}" aria-hidden="true"></div>
+          <ol class="series-steps" style="--n: {{ n_steps }}">
+            {%- for slug in sr.steps -%}
+            {%- assign r = resources | where: 'slug', slug | first -%}
+            {%- if r %}
+            <li><a href="{{ r.url }}"{% if r.url contains 'github.com' %} target="_blank" rel="noopener"{% endif %}>{{ r.title }}</a></li>
+            {%- endif -%}
+            {%- endfor %}
+          </ol>
+        </div>
+      </section>
+      {%- endfor %}
+
+      {%- comment -%} -------------------------------------------------------- About {%- endcomment %}
+      <section class="section about" id="about" aria-labelledby="about-title">
+        <div class="wrap">
+          <h2 id="about-title">About me</h2>
+
+          <div class="about-top">
+            <div class="about-side">
+              {%- comment -%} The three plain white circles around the photo are decoration only. {%- endcomment %}
+              <div class="about-photo">
+                <img src="{{ me.photo | relative_url }}" width="480" height="480" loading="lazy" decoding="async" alt="Portrait of {{ me.name }}">
+                <span class="drop drop--1" aria-hidden="true"></span>
+                <span class="drop drop--2" aria-hidden="true"></span>
+                <span class="drop drop--3" aria-hidden="true"></span>
+              </div>
+
+              <img class="about-art" src="{{ '/assets/img/about-760.webp' | relative_url }}"
+                   srcset="{{ '/assets/img/about-760.webp' | relative_url }} 760w, {{ '/assets/img/about-1600.webp' | relative_url }} 1688w"
+                   sizes="(min-width: 860px) 360px, 90vw"
+                   width="760" height="404" loading="lazy" decoding="async"
+                   alt="An enzyme in pink and blue ribbons floating above a glossy free energy landscape of peaks and valleys">
+            </div>
+
+            <div class="about-id">
+              <p class="about-name">{{ me.name }}{% if me.degree %}, {{ me.degree }}{% endif %}</p>
+              <p class="about-role">{{ me.role }}</p>
+              <p class="about-where"><a href="{{ me.affiliation.group_url }}" target="_blank" rel="noopener">{{ me.affiliation.group }}</a>, {{ me.affiliation.institute }}</p>
+              <p class="about-where">{{ me.affiliation.department }}, {{ me.affiliation.faculty }}</p>
+              <p class="about-bio">{{ me.bio }}</p>
+              {%- if me.email %}
+              <p class="about-mail">
+                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 6l7 5 7-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <a class="js-email" data-user="{{ me.email.user }}" data-domain="{{ me.email.domain }}">{{ me.email.user }} (at) {{ me.email.domain }}</a>
+              </p>
+              {%- endif %}
+              <ul class="profiles" role="list" aria-label="Profiles">
+                {%- for l in me.links %}
+                <li><a href="{% if l.url contains '://' %}{{ l.url }}{% else %}{{ l.url | relative_url }}{% endif %}"{% if l.url contains '://' %} target="_blank" rel="noopener me"{% endif %}>{{ l.name }}</a></li>
+                {%- endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="about-cols">
+            <div class="about-col" id="publications">
+              <h3 id="pubs-title">Publications</h3>
+              {%- comment -%} The list scrolls in place, so it can grow without making the page longer. {%- endcomment %}
+              <div class="scroller" tabindex="0" role="region" aria-labelledby="pubs-title">
+                <ol class="pub-list" role="list">
+                  {%- for p in site.data.publications %}
+                  <li class="pub">
+                    <span class="pub-year">{{ p.year }}</span>
+                    <div class="pub-body">
+                      <h4><a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a></h4>
+                      <p class="pub-authors">{{ p.authors | replace: 'A. V. Pinto', '<b>A. V. Pinto</b>' }}</p>
+                      <p class="pub-where">
+                        <i>{{ p.journal }}</i>
+                        {%- if p.cover %}<a class="pub-cover" href="{{ p.cover }}" target="_blank" rel="noopener">Front cover</a>{% endif %}
+                      </p>
+                    </div>
+                  </li>
+                  {%- endfor %}
+                </ol>
+              </div>
+            </div>
+
+            <div class="about-col" id="artwork">
+              <h3 id="art-title">Journal covers and artwork</h3>
+              <div class="scroller" tabindex="0" role="region" aria-labelledby="art-title">
+                <ul class="covers" role="list">
+                  {%- for c in gallery.covers %}
+                  <li>
+                    <a class="cover{% unless c.image %} cover--text{% endunless %}" href="{{ c.url }}" target="_blank" rel="noopener" title="Open this issue on the journal's website">
+                      {%- if c.image %}
+                      <img src="{{ '/assets/img/gallery/' | append: c.image | relative_url }}" alt="Front cover of {{ c.journal }}, {{ c.issue }}" loading="lazy" decoding="async">
+                      {%- else %}
+                      <span class="cover-journal">{{ c.journal }}</span>
+                      <span class="cover-kind">Front cover</span>
+                      {%- endif %}
+                    </a>
+                    <span class="tile-caption">{{ c.issue }}</span>
+                  </li>
+                  {%- endfor %}
+                </ul>
+                <ul class="artworks" role="list">
+                  {%- for a in gallery.artwork %}
+                  <li{% if a.wide %} class="is-wide"{% endif %}>
+                    <a class="artwork{% if a.fit == 'contain' %} artwork--whole{% endif %}" href="{{ '/assets/img/gallery/' | append: a.image | relative_url }}" target="_blank" rel="noopener" title="Open the full image">
+                      <img src="{{ '/assets/img/gallery/' | append: a.thumb | relative_url }}" alt="{{ a.alt }}" loading="lazy" decoding="async"{% if a.position %} style="object-position: {{ a.position }}"{% endif %}>
+                    </a>
+                    <span class="tile-caption">{{ a.title }}</span>
+                  </li>
+                  {%- endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    {%- comment -%} ------------------------------------------------------- Footer {%- endcomment %}
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        {%- if me.cv %}
+        <div class="footer-block">
+          <h2>Curriculum vitae</h2>
+          <p>
+            <a class="footer-file" href="{{ me.cv.file | relative_url }}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5.5 2.5h6l4 4v11h-10z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11.5 2.5v4h4M10 9.5v5M7.8 12.3 10 14.5l2.2-2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {{ me.cv.label }}
+            </a>
+            <span class="footer-file-meta">{{ me.cv.details }}</span>
+          </p>
+        </div>
+        {%- endif %}
+
+        {%- if me.location %}
+        <div class="footer-block">
+          <h2>{{ me.location }}</h2>
+          {%- comment -%} site.js replaces this line with the current time there and the difference to the visitor's own time. {%- endcomment %}
+          <p class="js-clock" data-tz="{{ me.timezone }}">Lisbon time zone</p>
+        </div>
+        {%- endif %}
+
+        <div class="footer-block footer-meta">
+          <p>Last updated in {{ site.time | date: '%B %Y' }}</p>
+          <p><a href="https://github.com/arvpinto/arvpinto.github.io" target="_blank" rel="noopener">Source of this page</a></p>
+          <p><a href="#top">Back to the top</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{{ '/assets/js/site.js?v=' | append: site.github.build_revision | relative_url }}" defer></script>
+  </body>
+</html>

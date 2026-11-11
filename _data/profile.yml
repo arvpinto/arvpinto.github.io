@@ -1,0 +1,64 @@
+# Everything personal on the home page lives here: the title and text of the
+# hero, the "About me" section at the bottom and the contact links.
+
+name: Alexandre V. Pinto
+degree: PhD in Chemistry
+role: Researcher and invited assistant professor
+
+# Photo shown in the About section (square; it is displayed as a circle).
+photo: /assets/img/alexandre-pinto.webp
+
+# Hero: the large title (one line per item) and the paragraph under it.
+headline:
+  - Enzymes
+  - in silico
+intro: >-
+  Workflows, scripts and models for enzyme simulations, from classical
+  molecular dynamics to QM/MM reaction mechanisms.
+
+# Text next to the title of the catalogue.
+resources_title: Portfolio
+resources_intro: >-
+  Open resources from my research in computational chemistry and biochemistry,
+  from simulation workflows and force field parameters to structural models
+  and software.
+
+affiliation:
+  group: High Performance Computing in Molecular Modelling Research Group
+  group_url: https://laqv.requimte.pt/research/research-groups/407-high_performance_computing_in_molecular_modelling
+  institute: LAQV-REQUIMTE
+  department: Department of Chemistry and Biochemistry
+  faculty: Faculty of Sciences, University of Porto
+
+# Short text of the About section.
+bio: >-
+  Computational chemist working on enzyme catalysis. I use molecular dynamics
+  and QM/MM methods to understand how enzymes work and to guide the design of
+  better biocatalysts.
+
+# Footer: where you are (with a live clock in this time zone) and the CV.
+location: Porto, Portugal
+timezone: Europe/Lisbon
+cv:
+  file: /assets/cv/Alexandre_V_Pinto_CV.pdf
+  label: Short CV
+  details: PDF, 2 pages
+
+# The address is split in two so that it is not written whole in the page
+# source; the page joins the parts for visitors.
+email:
+  user: alexandre.pinto
+  domain: fc.up.pt
+
+# Profile links, in the order shown.
+links:
+  - name: ORCID
+    url: https://orcid.org/0000-0002-0950-3291
+  - name: Google Scholar
+    url: https://scholar.google.com/citations?user=OdpEvy0AAAAJ
+  - name: Web of Science
+    url: https://www.webofscience.com/wos/author/record/AAZ-7627-2021
+  - name: GitHub
+    url: https://github.com/arvpinto
+  - name: LinkedIn
+    url: https://www.linkedin.com/in/alexrvpinto/

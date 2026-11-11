@@ -1,9 +1,19 @@
-title: CompBioChem Tutorials
-description: Step-by-step tutorials, scripts and models for enzyme simulations, from classical molecular dynamics to QM/MM reaction mechanisms.
+title: Alexandre V. Pinto
+tagline: Enzymes in silico
+description: Workflows, scripts and models for enzyme simulations, from classical molecular dynamics to QM/MM reaction mechanisms.
 author: Alexandre V. Pinto
 url: https://arvpinto.github.io
 lang: en
 image: /assets/img/social.jpg
+
+# Profiles listed in the structured data that search engines read.
+social:
+  name: Alexandre V. Pinto
+  links:
+    - https://orcid.org/0000-0002-0950-3291
+    - https://scholar.google.com/citations?user=OdpEvy0AAAAJ
+    - https://github.com/arvpinto
+    - https://www.linkedin.com/in/alexrvpinto/
 
 # The home page uses its own layout and stylesheet (no remote theme).
 plugins:
