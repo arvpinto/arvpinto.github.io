@@ -1,0 +1,1080 @@
+/* Home page styles.
+   Black background to match the artwork, whose edges are pure black.
+   The two accents (blue and crimson) are sampled from the hero artwork;
+   topic colours come from _data/categories.yml (passed to elements as --c). */
+
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/hanken-grotesk-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/hanken-grotesk-latin-italic.woff2") format("woff2");
+}
+
+:root {
+  --bg: #000000;
+  --surface: #0c0e12;
+  --surface-2: #181b21;
+  --ink: #eef2f6;
+  --ink-2: #9ea7b4;
+  --ink-3: #7c8592;
+  --line: #20242b;
+  --line-2: #353a44;
+  --blue: #5cbcec;
+  --crimson: #f0456f;
+  --accent: var(--blue);
+  --plate: #eef1f5;
+  --glass: rgba(0, 0, 0, 0.72);
+  --glass-card: rgba(12, 14, 18, 0.82);
+  --hover: #262a33;
+  --thumb: #3a404b;
+  --drop: #ffffff;
+
+  --sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wrap: 1240px;
+  --gutter: clamp(18px, 4vw, 40px);
+  --topbar: 64px;
+
+  color-scheme: dark;
+}
+
+/* Light mode: the same page on white, with the inverted artwork. Chosen with
+   the button in the top bar; site.js sets data-theme="light" on <html>. */
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #f4f6f9;
+  --surface-2: #e9edf2;
+  --ink: #12161c;
+  --ink-2: #4c5563;
+  --ink-3: #6b7380;
+  --line: #e3e7ec;
+  --line-2: #cfd5dd;
+  --blue: #1677b3;
+  --crimson: #d2245a;
+  --plate: #eef1f5;
+  --glass: rgba(255, 255, 255, 0.78);
+  --glass-card: rgba(255, 255, 255, 0.85);
+  --hover: #dde3ea;
+  --thumb: #c3cad3;
+  --drop: #12161c;
+  color-scheme: light;
+}
+
+/* Until site.js has switched an image to its light version, it stays hidden
+   in light mode, so the dark artwork never flashes on a white page. */
+:root[data-theme="light"] img[data-light-src]:not(.is-light) { visibility: hidden; }
+
+/* ---------------------------------------------------------------- base */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--topbar) + 16px);
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: 16px; top: -60px;
+  z-index: 50;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 999px;
+  font-weight: 600;
+}
+.skip:focus { top: 12px; }
+
+@media (max-width: 719.98px) { .hide-sm { display: none !important; } }
+
+/* --------------------------------------------------------------- pills */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+.pill--light { background: var(--ink); color: var(--bg); }
+.pill--light:hover { background: color-mix(in srgb, var(--ink) 88%, var(--bg)); }
+.pill--outline { border-color: var(--line-2); background: transparent; color: var(--ink); }
+.pill--outline:hover { border-color: var(--ink-2); }
+
+/* -------------------------------------------------------------- topbar */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+          backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-inner {
+  height: var(--topbar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+}
+.brand-mark { display: block; width: auto; height: 46px; }
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-links a:not(.pill) {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.nav-links a:not(.pill):hover { color: var(--ink); background: var(--surface-2); }
+.nav-links li:last-child { margin-left: 8px; }
+.nav-links .pill { min-height: 38px; padding: 0 16px; }
+
+/* Light and dark mode button: shows the sun in dark mode and the moon in light mode. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.theme-toggle:hover { border-color: var(--ink-3); background: var(--surface-2); }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+.nav-links li:has(.theme-toggle) { margin-left: 8px; }
+.nav-links li:has(.theme-toggle) + li { margin-left: 8px; }
+
+/* ---------------------------------------------------------------- hero */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* The artwork is shown whole: its edges are already black. */
+.hero-art {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.hero-art img { width: 100%; height: auto; }
+
+/* Live copy of the water (the lower part of the artwork), drawn by site.js.
+   --waterline is set from the script so the two always agree. */
+.hero-water {
+  position: absolute;
+  left: 0;
+  top: var(--waterline, 51%);
+  width: 100%;
+  height: calc(100% - var(--waterline, 51%));
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  pointer-events: none;
+}
+.hero-water.is-live { opacity: 1; }
+
+.hero-text { padding: 8px 0 48px; }
+
+.hero h1 {
+  margin: 0 0 20px;
+  font-weight: 600;
+  font-size: clamp(2.75rem, 11vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+.hero h1 span { display: block; }
+
+.lede {
+  max-width: 34em;
+  margin: 0 0 28px;
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* Name and affiliation. The whole block is a link to the About section. */
+.author {
+  display: block;
+  margin: 0 0 32px;
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid #ff5257;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.author span { display: block; margin: 0 0 4px; max-width: 40em; }
+.author span:last-child { margin-bottom: 0; }
+.author .author-name { color: var(--ink); font-weight: 600; font-size: 1rem; }
+.author:hover { color: var(--ink); border-left-color: var(--blue); }
+.author:hover .author-name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+/* Latest addition: picked automatically from the newest "added" date. */
+.latest {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 32rem;
+  padding: 12px 18px 12px 12px;
+  background: var(--glass-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: border-color 0.15s;
+}
+.latest:hover { border-color: color-mix(in srgb, var(--c) 60%, var(--line)); }
+.latest-thumb {
+  flex: none;
+  width: 96px;
+  height: 72px;
+  padding: 6px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--c) 10%, var(--plate));
+}
+.latest-body { display: flex; flex-direction: column; min-width: 0; }
+.latest-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.latest-label::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+}
+.latest-title {
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.latest-title::after { content: ""; position: absolute; inset: 0; }
+.latest-text {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Wide screens: text on the left, the artwork in its own column on the right. */
+@media (min-width: 1000px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    column-gap: 48px;
+    align-items: center;
+  }
+  .hero-art { order: 2; max-width: 640px; margin: 0 0 0 auto; }
+  .hero-text { order: 1; padding: 40px 0; }
+  .hero-text > * { max-width: 31rem; }
+  .hero h1 { font-size: clamp(3.5rem, 6vw, 5.5rem); }
+}
+
+/* Opening sequence, played once: the lamp in the artwork flickers on, then
+   the text comes up as if lit by it. */
+@keyframes lamp-on {
+  0%   { opacity: 0; }
+  10%  { opacity: 0.5; }
+  15%  { opacity: 0.08; }
+  24%  { opacity: 0.75; }
+  30%  { opacity: 0.3; }
+  48%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes lit {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-art img { animation: lamp-on 1.5s linear both; }
+
+/* Every so often the lamp stutters, as old tubes do. site.js adds one of
+   these classes at random intervals and removes it when it ends. The whole
+   scene dims with it, since the lamp is the only light in the artwork. */
+@keyframes flicker-short {
+  0%   { opacity: 1; }
+  4%   { opacity: 0.42; }
+  7%   { opacity: 0.96; }
+  11%  { opacity: 0.3; }
+  15%  { opacity: 0.88; }
+  18%  { opacity: 0.55; }
+  24%  { opacity: 1; }
+  41%  { opacity: 1; }
+  44%  { opacity: 0.38; }
+  49%  { opacity: 0.92; }
+  54%  { opacity: 0.6; }
+  62%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes flicker-long {
+  0%   { opacity: 1; }
+  3%   { opacity: 0.45; }
+  5%   { opacity: 0.95; }
+  8%   { opacity: 0.25; }
+  12%  { opacity: 0.8; }
+  14%  { opacity: 0.35; }
+  21%  { opacity: 0.16; }
+  27%  { opacity: 0.16; }
+  30%  { opacity: 0.7; }
+  33%  { opacity: 0.3; }
+  37%  { opacity: 0.92; }
+  40%  { opacity: 0.5; }
+  46%  { opacity: 1; }
+  60%  { opacity: 1; }
+  63%  { opacity: 0.55; }
+  67%  { opacity: 0.95; }
+  70%  { opacity: 0.4; }
+  76%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+/* Opacity jumps sharply between steps, as a failing tube does. */
+.hero-art.flicker-short { animation: flicker-short 1.7s cubic-bezier(0.7, 0, 0.3, 1); }
+.hero-art.flicker-long  { animation: flicker-long 2.6s cubic-bezier(0.7, 0, 0.3, 1); }
+.hero-text > * { animation: lit 0.9s cubic-bezier(0.2, 0.6, 0.2, 1) both; }
+.hero-text > :nth-child(1) { animation-delay: 0.45s; }
+.hero-text > :nth-child(2) { animation-delay: 0.6s; }
+.hero-text > :nth-child(3) { animation-delay: 0.75s; }
+.hero-text > :nth-child(4) { animation-delay: 0.9s; }
+
+/* ------------------------------------------------------------ sections */
+
+.section { padding: clamp(64px, 9vw, 112px) 0 0; }
+.hero + .section { padding-top: clamp(40px, 6vw, 76px); }
+
+.section h2 {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(1.75rem, 3.4vw, 2.625rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.section-head {
+  display: grid;
+  gap: 12px 48px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.section-head p {
+  margin: 0;
+  max-width: 36em;
+  color: var(--ink-2);
+}
+/* Wide screens: the title keeps to one line and the text sits beside it. */
+@media (min-width: 900px) {
+  .section-head { grid-template-columns: auto minmax(0, 1fr); gap: 12px 64px; }
+  .section-head h2 { white-space: nowrap; }
+  .section-head p { justify-self: end; }
+}
+
+/* ----------------------------------------------------------- catalogue */
+
+.toolbar {
+  position: sticky;
+  top: var(--topbar);
+  z-index: 20;
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+          backdrop-filter: saturate(1.4) blur(14px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.toolbar-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 16px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.toolbar .chips { grid-column: 1 / -1; }
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 14px 0 18px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+}
+.search:focus-within { border-color: var(--accent); }
+.search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  outline: none;
+}
+.search input::placeholder { color: var(--ink-3); }
+.search kbd {
+  padding: 1px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  background: var(--bg);
+}
+
+.selects { display: flex; gap: 10px; }
+.selects select {
+  height: 46px;
+  padding: 0 40px 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%239ea7b4' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 16px center;
+  -webkit-appearance: none;
+          appearance: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.selects select:hover { border-color: var(--ink-3); }
+.selects option { background: var(--surface); color: var(--ink); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+.chip[style]::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+}
+.chip:hover { border-color: var(--ink-3); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.chip-n { opacity: 0.6; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 719.98px) {
+  .toolbar-inner { grid-template-columns: minmax(0, 1fr); }
+  .selects select { flex: 1; min-width: 0; }
+  .selects label { flex: 1; display: flex; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter); scrollbar-width: none; }
+  .chip { flex: none; }
+  .toolbar { position: static; }
+}
+
+.result-count { margin: 24px 0 18px; font-size: 0.9375rem; color: var(--ink-2); }
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 24px;
+}
+.card[hidden] { display: none; }
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.card:hover {
+  border-color: color-mix(in srgb, var(--c) 55%, var(--line));
+  background: color-mix(in srgb, var(--c) 5%, var(--surface));
+}
+.card:focus-within { border-color: var(--accent); }
+
+/* Figures keep a light plate: many have dark lines on a transparent background. */
+.card-fig {
+  aspect-ratio: 16 / 10;
+  padding: 18px;
+  background: color-mix(in srgb, var(--c) 8%, var(--plate));
+  overflow: hidden;
+}
+.card-fig img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card:hover .card-fig img { transform: scale(1.04); }
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 18px 22px 20px;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+.card-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--c) 80%, var(--ink));
+}
+.card-cat::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+}
+.tag-new {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--blue) 16%, transparent);
+  color: var(--blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-weight: 600;
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+.card-link { text-decoration: none; }
+.card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card-link:focus-visible { outline: none; }
+
+.card-text { margin: 0 0 10px; font-size: 0.9375rem; line-height: 1.5; color: var(--ink-2); }
+.card-track { margin: 0 0 6px; font-size: 0.875rem; font-weight: 500; color: var(--ink); }
+
+.card-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 14px;
+}
+.tools { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tools button {
+  position: relative;
+  z-index: 2;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 0.78125rem;
+  font-weight: 500;
+}
+.tools button:hover { color: var(--ink); background: var(--hover); }
+.tools button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.added { flex: none; font-size: 0.8125rem; color: var(--ink-2); white-space: nowrap; }
+
+.more { display: flex; justify-content: center; margin-top: 36px; }
+.more[hidden] { display: none; }
+
+.empty {
+  padding: 56px 24px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+.empty[hidden] { display: none; }
+.empty p { margin: 0 0 16px; font-size: 1.125rem; }
+
+/* -------------------------------------------------------------- series */
+
+/* The plot is built and animated by site.js: an energy profile with one lamp
+   per step and a pulse of light that travels along it in a loop. The colours
+   of the lamps and of the step titles are set from the script as it runs. */
+.series-plot {
+  display: none;
+  height: clamp(130px, 17vw, 210px);
+  margin: 28px 0 0;
+}
+.series-plot.is-ready { display: block; }
+.series-plot svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.series-steps {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  counter-reset: step;
+  display: grid;
+  gap: 0;
+}
+.series-steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.series-steps li::before {
+  content: counter(step);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--lamp, var(--ink-3));
+}
+.series-steps a {
+  color: var(--ink-2);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.series-steps a:hover,
+.series-steps a:focus-visible {
+  color: var(--ink) !important;
+  text-decoration: underline;
+  text-decoration-color: var(--crimson);
+  text-underline-offset: 4px;
+}
+
+@media (min-width: 860px) {
+  .series-steps {
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    margin-top: 0;
+  }
+  .series-steps li {
+    display: block;
+    padding: 12px 10px 0;
+    border-top: 0;
+    text-align: center;
+  }
+  .series-steps li::before { display: block; margin-bottom: 4px; }
+}
+
+/* --------------------------------------------------------------- about */
+
+.about { padding-bottom: clamp(36px, 5vw, 56px); }
+
+/* Left: the photo with the energy surface artwork under it, both centred in
+   the space beside the text. Right: the text. */
+.about-top {
+  display: grid;
+  gap: 32px 56px;
+  align-items: start;
+  margin: 36px 0 0;
+}
+.about-side {
+  display: grid;
+  gap: 26px;
+  justify-items: center;
+}
+
+/* Round photo with three plain white circles of different sizes around it,
+   placed unevenly: one at the top left and two at the bottom right. */
+.about-photo {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.drop {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--drop);
+}
+.drop--1 { width: 15px; height: 15px; left: -3px;  top: 5px; }
+.drop--2 { width: 25px; height: 25px; left: 124px; top: 101px; }
+.drop--3 { width: 9px;  height: 9px;  left: 117px; top: 143px; }
+
+.about-id { font-size: 0.9375rem; line-height: 1.5; color: var(--ink-2); }
+.about-id p { margin: 0 0 2px; }
+.about-id .about-name {
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  letter-spacing: -0.015em;
+}
+.about-id .about-role { color: var(--ink); }
+.about-where a,
+.about-mail a {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--blue) 70%, transparent);
+  text-underline-offset: 3px;
+}
+.about-where a:hover,
+.about-mail a:hover { color: var(--blue); }
+.about-id .about-bio {
+  margin: 14px 0 12px;
+  max-width: 34em;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.about-id .about-mail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.about-mail svg { flex: none; color: var(--ink-3); }
+
+.profiles {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.profiles a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.profiles a:hover { border-color: var(--blue); color: var(--blue); }
+
+.about-art {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+}
+
+/* Publications on the left, covers and artwork on the right. Both lists
+   scroll in place, straight on the black page (no boxes around them). */
+.about-cols {
+  display: grid;
+  gap: 40px 56px;
+  margin-top: clamp(28px, 3.5vw, 40px);
+}
+.about-col { min-width: 0; }
+.about-col h3 {
+  margin: 0;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  letter-spacing: -0.015em;
+}
+/* Both lists are as tall as the first row of journal covers. site.js measures
+   that row and sets --list-height; the value here is used until it has. */
+.scroller {
+  height: var(--list-height, 264px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 14px;
+  background: var(--bg);
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumb) var(--bg);
+}
+.scroller::-webkit-scrollbar { width: 8px; }
+.scroller::-webkit-scrollbar-track { background: var(--bg); }
+.scroller::-webkit-scrollbar-thumb { background: var(--thumb); border-radius: 8px; }
+
+.pub-list { list-style: none; margin: 0; padding: 0; }
+.pub {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0 10px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+.pub:first-child { border-top: 0; }
+.pub-year {
+  padding-top: 1px;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+.pub h4 {
+  margin: 0 0 6px;
+  font-weight: 600;
+  font-size: 0.96875rem;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+.pub h4 a { text-decoration: none; }
+.pub h4 a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--blue);
+  text-underline-offset: 3px;
+}
+.pub sub { font-size: 0.7em; }
+.pub-authors { margin: 0 0 4px; font-size: 0.84375rem; line-height: 1.45; color: var(--ink-2); }
+.pub-authors b { font-weight: 600; color: var(--ink); }
+.pub-where {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 0.84375rem;
+  color: var(--ink-2);
+}
+.pub-cover {
+  padding: 1px 9px;
+  border: 1px solid color-mix(in srgb, var(--crimson) 55%, transparent);
+  border-radius: 999px;
+  color: var(--crimson);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.pub-cover:hover { background: color-mix(in srgb, var(--crimson) 14%, transparent); }
+
+/* Covers (portrait tiles) and artwork (landscape tiles). */
+.covers,
+.artworks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.covers { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-top: 18px; }
+.artworks { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 20px 0 4px; }
+
+.cover,
+.artwork {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+.cover:hover,
+.artwork:hover { border-color: var(--blue); }
+
+.cover { aspect-ratio: 3 / 4; background: var(--surface); }
+.cover img { width: 100%; height: 100%; object-fit: cover; }
+/* A cover without an image yet: the journal name stands in for it. */
+.cover--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  background: linear-gradient(160deg, #1b1f27, #0c0e12 70%);
+}
+.cover-journal { font-weight: 600; font-size: clamp(0.75rem, 2.6vw, 0.875rem); line-height: 1.2; letter-spacing: -0.01em; }
+.cover-kind { font-size: 0.75rem; color: var(--crimson); font-weight: 600; }
+
+.artwork { aspect-ratio: 4 / 3; background: #ffffff; }
+.artworks li.is-wide { grid-column: 1 / -1; }
+.artworks li.is-wide .artwork { aspect-ratio: 3 / 2; }
+.artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* Images drawn on white are shown whole, with a little room around them. */
+.artwork--whole img { object-fit: contain; padding: 6px; }
+.artwork:hover img { transform: scale(1.04); }
+
+.tile-caption sub { font-size: 0.75em; }
+.tile-caption {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78125rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+
+/* On narrow screens the publications keep a fixed height and the gallery is
+   shown whole, with the artwork after the text. */
+@media (max-width: 859.98px) {
+  .about-side { display: contents; }
+  .about-photo { justify-self: start; }
+  .about-art { order: 3; justify-self: center; }
+}
+@media (max-width: 999.98px) {
+  #publications .scroller { height: 300px; }
+  #artwork .scroller { height: auto; padding-right: 0; }
+}
+@media (min-width: 860px) {
+  .about-top { grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr); }
+}
+@media (min-width: 1000px) {
+  .about-cols { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+}
+
+/* -------------------------------------------------------------- footer */
+
+.site-footer { border-top: 1px solid var(--line); }
+.footer-grid {
+  display: grid;
+  gap: 32px 56px;
+  padding-top: 32px;
+  padding-bottom: 36px;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+.footer-block h2 {
+  margin: 0 0 12px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.footer-block p { margin: 0 0 6px; max-width: 30em; }
+
+.footer-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--blue) 70%, transparent);
+  text-underline-offset: 3px;
+}
+.footer-file svg { flex: none; color: var(--ink-3); }
+.footer-file:hover { color: var(--blue); }
+.footer-file-meta { margin-left: 8px; font-size: 0.8125rem; color: var(--ink-3); }
+.js-clock { font-variant-numeric: tabular-nums; }
+
+.footer-meta a { color: var(--ink-2); }
+.footer-meta a:hover { color: var(--ink); }
+
+@media (min-width: 860px) {
+  .footer-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; }
+  .footer-meta { text-align: right; }
+}
+
+/* ------------------------------------------------------ reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .hero-water { display: none; }
+}
