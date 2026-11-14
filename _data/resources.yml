@@ -46,12 +46,12 @@
 
 - slug: residue-deletion
   title: Per-residue contributions to the barrier
-  text: Delete residues one at a time from the reactant and transition state to measure how each one changes the activation energy.
+  text: Delete or mutate residues, one at a time or several at once, and recalculate the QM/MM reactant and transition state energies to see how each change affects the activation energy.
   category: qmmm
-  tools: [CP2K, VMD, cpptraj, parmed]
-  url: https://arvpinto.github.io/enzyme_ts_deletion_cp2k/
+  tools: [CP2K, AmberTools, cpptraj, parmed, Python]
+  url: https://arvpinto.github.io/enzyme_mutagenesis_cp2k/
   image: residue-deletion.webp
-  alt: Protein surface with acidic and basic residues coloured red and blue
+  alt: Transparent protein surface with acidic and basic residues coloured red and blue around the bound substrate
   added: 2024-06-09
 
 # Date unknown (repository not public): please add "added:".
