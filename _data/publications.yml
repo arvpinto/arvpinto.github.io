@@ -1,0 +1,54 @@
+# Publications listed in the About section, newest first. The list scrolls,
+# so it can grow freely. Fields:
+#
+#   title:    paper title (HTML allowed, for italics and subscripts)
+#   authors:  author list as it should be printed; your own name is
+#             highlighted automatically if written as "A. V. Pinto"
+#   journal:  journal name
+#   year:     publication year
+#   url:      link to the paper (DOI link when there is one)
+#   cover:    optional link to the journal issue, if the paper made the cover
+
+- title: "Enhancing the catalytic performance of <i>Is</i>MHETase through electrostatic engineering of the active site"
+  authors: K. S. R. Clausen, A. V. Pinto, R. Dorau, et al.
+  journal: Chem Circularity
+  year: 2026
+  url: "https://www.cell.com/chem-circularity/fulltext/S3051-2948(26)00113-1"
+
+- title: "Beyond Fang's fury: a computational study of the enzyme-membrane interaction and catalytic pathway of the snake venom phospholipase A<sub>2</sub> toxin"
+  authors: J. Castro-Amorim, A. V. Pinto, A. K. Mukherjee, M. J. Ramos, P. A. Fernandes
+  journal: Chemical Science
+  year: 2025
+  url: https://doi.org/10.1039/D4SC06511E
+
+- title: "Revisiting the reaction pathways for phospholipid hydrolysis catalyzed by phospholipase A<sub>2</sub> with QM/MM methods"
+  authors: A. V. Pinto, P. Ferreira, A. V. Cunha, R. W. A. Havenith, A. L. Magalhães, M. J. Ramos, P. A. Fernandes
+  journal: Chemical Science
+  year: 2024
+  url: https://doi.org/10.1039/D4SC02315C
+
+- title: "Development of nanoscale graphene oxide models for the adsorption of biological molecules"
+  authors: A. V. Pinto, P. Ferreira, P. A. Fernandes, A. L. Magalhães, M. J. Ramos
+  journal: The Journal of Physical Chemistry B
+  year: 2023
+  url: https://doi.org/10.1021/acs.jpcb.2c06037
+  cover: https://pubs.acs.org/toc/jpcbfk/127/2
+
+- title: "The role of acetylated cyclooxygenase-2 in the biosynthesis of resolvin precursors derived from eicosapentaenoic acid"
+  authors: A. Cebrián-Prats, A. V. Pinto, À. González-Lafont, P. A. Fernandes, J. M. Lluch
+  journal: Organic & Biomolecular Chemistry
+  year: 2022
+  url: https://doi.org/10.1039/D1OB01932E
+
+- title: "Reaction mechanism of MHETase, a PET degrading enzyme"
+  authors: A. V. Pinto, P. Ferreira, R. P. P. Neves, P. A. Fernandes, M. J. Ramos, A. L. Magalhães
+  journal: ACS Catalysis
+  year: 2021
+  url: https://doi.org/10.1021/acscatal.1c02444
+  cover: https://pubs.acs.org/toc/accacs/11/16
+
+- title: "Intramolecular hydrogen bonds in tip-functionalized single-walled carbon nanotubes as pH-sensitive gates"
+  authors: A. V. Pinto, A. L. Magalhães
+  journal: The Journal of Physical Chemistry A
+  year: 2020
+  url: https://doi.org/10.1021/acs.jpca.0c03710

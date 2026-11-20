@@ -1,0 +1,13 @@
+# Series: entries meant to be followed in order.
+# "steps" lists slugs from _data/resources.yml. Any number of steps works;
+# each series is drawn on the home page as a reaction energy profile, with
+# one light per step.
+
+- id: qmmm-cp2k
+  title: Enzyme QM/MM with CP2K
+  steps:
+    - qmmm-prep
+    - static-qmmm
+    - dynamic-qmmm
+    - residue-deletion
+    - macrodipole

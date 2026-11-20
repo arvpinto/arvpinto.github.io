@@ -1,0 +1,67 @@
+# Journal covers and artwork shown next to the publications.
+# Images live in assets/img/gallery/ as WebP (see the README for sizes).
+#
+# covers:  one entry per journal cover (tile links to the journal issue).
+#   journal: journal name
+#   issue:   volume, issue and year as printed under the tile
+#   url:     link to the issue
+#   image:   cover image (portrait, 480 px wide). Without it the tile shows
+#            the journal name instead.
+#
+# artwork: one entry per image (tile opens the full image).
+#   title:    caption (HTML allowed, for italics and subscripts)
+#   image:    full-size image (at most 2400 px on the long side)
+#   thumb:    smaller version shown on the page (760 px; 1100 px wide if wide)
+#   alt:      description for screen readers
+#   wide:     true to span the whole width of the gallery
+#   fit:      "contain" shows the whole image on a white tile (best for
+#             images on a white background); leave out to fill the tile
+#   position: which part to keep when the tile crops the image, e.g. "50% 35%"
+
+covers:
+  - journal: ACS Catalysis
+    issue: Volume 11, issue 16 (2021)
+    url: https://pubs.acs.org/toc/accacs/11/16
+    image: cover-acs-catalysis-2021.webp
+
+  - journal: Nature Reviews Chemistry
+    issue: Volume 6, issue 7 (2022)
+    url: https://www.nature.com/natrevchem/volumes/6/issues/7
+    image: cover-nat-rev-chem-2022.webp
+
+  - journal: The Journal of Physical Chemistry B
+    issue: Volume 127, issue 2 (2023)
+    url: https://pubs.acs.org/toc/jpcbfk/127/2
+    image: cover-jpcb-2023.webp
+
+artwork:
+  - title: Human sPLA<sub>2</sub> at a membrane
+    image: human-spla2-membrane.webp
+    thumb: human-spla2-membrane-thumb.webp
+    alt: Human phospholipase A2 in magenta ribbons inside a white surface, resting on a membrane surrounded by water molecules and ions
+    wide: true
+    position: 50% 53%
+
+  - title: MHETase
+    image: mhetase.webp
+    thumb: mhetase-thumb.webp
+    alt: MHETase in pink and white ribbons, surrounded by a blurred halo of coloured copies of its structure
+    fit: contain
+
+  - title: <i>Bothrops asper</i> sPLA<sub>2</sub> at a membrane
+    image: bothrops-asper-spla2.webp
+    thumb: bothrops-asper-spla2-thumb.webp
+    alt: Snake venom phospholipase A2 in yellow ribbons and a pink surface, sitting on a lilac lipid membrane with a phospholipid drawn into its active site
+    fit: contain
+
+  - title: Human sPLA<sub>2</sub> and a phospholipid
+    image: human-spla2-phospholipid.webp
+    thumb: human-spla2-phospholipid-thumb.webp
+    alt: Human phospholipase A2 in glowing pink ribbons, with a phospholipid in white spheres in its active site
+    fit: contain
+
+  - title: MHETase on graphene oxide
+    image: mhetase-graphene-oxide.webp
+    thumb: mhetase-graphene-oxide-thumb.webp
+    alt: Grey molecular surface of MHETase on a graphene oxide sheet covered by water molecules
+    position: 50% 40%
