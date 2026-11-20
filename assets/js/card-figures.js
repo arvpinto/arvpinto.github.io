@@ -1215,7 +1215,12 @@
     file: 'dihedral', period: 12, still: 7.6,
     init: function (d) {
       var order = d.angles.map(function (a, i) { return [a, i]; }).sort(function (a, b) { return a[0] - b[0]; });
-      return { d: d, order: order };
+      // sense of rotation of the moving group when the dihedral increases
+      var tor = d.torsion, f0 = d.frames[order[0][1]], f1 = d.frames[order[1][1]];
+      var u = V3.norm(V3.sub(f0[tor[2]], f0[tor[1]]));
+      var perp = function (f) { var v = V3.sub(f[tor[3]], f[tor[2]]); return V3.sub(v, V3.scale(u, V3.dot(v, u))); };
+      var sense = V3.dot(V3.cross(perp(f0), perp(f1)), u) >= 0 ? 1 : -1;
+      return { d: d, order: order, sense: sense };
     },
     angle: function (t) {
       if (t < 3.4) return -176.5;
@@ -1234,7 +1239,7 @@
       var xyz = this.geom(S, ang), tor = S.d.torsion;
       S.ang = ang;
       var on = {}; tor.forEach(function (i) { on[i] = 1; });
-      drawMol(L, xyz, S.d.el, S.d.bonds, { scale: 1.25, bondScale: 1.25, glow: function (i) { return on[i] ? 0.22 : 0; }, rim: 1.2 });
+      drawMol(L, xyz, S.d.el, S.d.bonds, { scale: 1.25, bondScale: 1.25, glow: function (i) { return on[i] ? 0.05 : 0; }, rim: 1.2 });
       // the rotatable bond as a glowing axis
       var a = xyz[tor[1]], b = xyz[tor[2]], u = V3.norm(V3.sub(b, a));
       L.cyl(V3.sub(a, V3.scale(u, 0.9)), V3.add(b, V3.scale(u, 0.9)), 0.06, 0.06, [1, 1, 1], 0.9, 0);
@@ -1273,10 +1278,27 @@
       tag(ctx, T, morph < 0.5 ? 'GAFF2 vs QM' : 'REFIT vs QM', x0, 22, { alpha: 0.85 });
       // rotation arc around the bond
       if (S.axis) {
-        var p = P(V3.lerp(S.axis[0], S.axis[1], 0.5));
-        ctx.save(); ctx.globalAlpha = 0.9;
-        var arc = new Path2D(); arc.ellipse(p[0], p[1], 20, 8, -0.35, Math.PI * 0.15, Math.PI * 1.75);
-        neon(ctx, T, arc, p[0] - 20, p[0] + 20, 1.2, 0.8);
+        var A = S.axis[0], B = S.axis[1], u = V3.norm(V3.sub(B, A));
+        var e1 = V3.norm(V3.cross(u, Math.abs(u[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0])), e2 = V3.cross(u, e1);
+        var c3 = V3.lerp(A, B, 0.62), rad = 1.0, sense = S.sense, spin = t * 1.5 * sense;
+        var pts = [];
+        for (var q = 0; q <= 40; q++) {
+          var th = spin + sense * q / 40 * Math.PI * 1.6;
+          pts.push(P(V3.add(c3, V3.add(V3.scale(e1, rad * Math.cos(th)), V3.scale(e2, rad * Math.sin(th))))));
+        }
+        var xs = pts.map(function (p) { return p[0]; });
+        neon(ctx, T, linePath(pts), Math.min.apply(null, xs), Math.max.apply(null, xs), 1.2, 0.95);
+        // arrowhead along the direction of rotation
+        var tip = pts[pts.length - 1], prev = pts[pts.length - 4];
+        var dx = tip[0] - prev[0], dy = tip[1] - prev[1], dl = Math.sqrt(dx * dx + dy * dy) || 1;
+        dx /= dl; dy /= dl;
+        ctx.save();
+        ctx.fillStyle = css(T.neonB, 0.95);
+        ctx.beginPath();
+        ctx.moveTo(tip[0] + dx * 6, tip[1] + dy * 6);
+        ctx.lineTo(tip[0] - dy * 4, tip[1] + dx * 4);
+        ctx.lineTo(tip[0] + dy * 4, tip[1] - dx * 4);
+        ctx.closePath(); ctx.fill();
         ctx.restore();
       }
     }
@@ -1488,20 +1510,18 @@
       var f = clamp(q / 0.75, -1, 1);
       return f < 0 ? mixc([0.93, 0.94, 0.96], ACID, -f) : mixc([0.93, 0.94, 0.96], BASE, f);
     },
-    frame: function (S, t, L) {
+    frame: function (S, t, L, T) {
       var d = S.d, k = this.k(t), tk = 0.4 + k * 2.2, f = ease(win(t, tk, tk + 0.8));
       var prev = S.confs[Math.max(0, k - 1)], curr = S.confs[k];
       var xyz = curr.map(function (p, i) { return V3.lerp(prev[i], p, k ? f : 1); });
-      var qa = d.charges[Math.max(0, k - 1)], qb = d.charges[k], self = this;
+      // the atom whose charge is read out on the chart
+      var pick = S.heavy[Math.floor(t / 0.75) % S.heavy.length], pulse = 0.5 + 0.5 * Math.sin(t * 8.4);
+      var mark = mixc(T.neonA, T.neonB, 0.5 + 0.5 * Math.sign(d.mean[pick]) * -1);
       drawMol(L, xyz, d.el, d.bonds, { scale: 1.15, bondScale: 1.2, rim: 1.2,
-        color: function (i) { return self.qcol(qa[i] + (qb[i] - qa[i]) * f); },
-        glow: function (i) { return 0.1 * Math.abs(qb[i]); } });
-      // previous conformers as thin ghosts
-      for (var j = 0; j < k; j++) {
-        drawMol(L, S.confs[j], d.el, d.bonds, { scale: 0.32, bondScale: 0.5, rim: 0.5, noH: true, lo: true,
-          color: function () { return [0.55, 0.6, 0.68]; } });
-      }
-      S.k = k; S.f = f;
+        color: function (i, e) { return i === pick ? mixc(elColor(e), mark, 0.6) : elColor(e); },
+        glow: function (i) { return i === pick ? 0.10 + 0.08 * pulse : 0; },
+        radius: function (i) { return i === pick ? 1.15 : 1; } });
+      S.k = k; S.f = f; S.pick = pick;
       return { R: mul3(rotY(0.3 * Math.sin(t * 0.4)), rotX(0.35)), dist: 31, fov: 0.6, target: [0, 0, 0], shift: [-0.46, 0.0], depth: 8, rim: [0.56, 1.0, 1.1] };
     },
     overlay: function (S, t, ctx, w, h, T) {
@@ -1523,17 +1543,25 @@
           ctx.beginPath(); ctx.arc(x, Y(q), 1.5, 0, Math.PI * 2); ctx.fill();
         }
         var mean = sum / (k + 1);
-        var c = mean < 0 ? T.neonB : T.neonA;
+        var c = mean < 0 ? T.neonB : T.neonA, on = i === S.pick;
+        if (on) {
+          ctx.fillStyle = css(c, 0.12);
+          ctx.fillRect(x - (x1 - x0) / n / 2, y0, (x1 - x0) / n, y1 - y0);
+        }
         ctx.fillStyle = css(c, 0.95);
         ctx.fillRect(x - 3.2, Y(mean) - 1, 6.4, 2);
-        ctx.fillStyle = css(c, 0.18);
+        ctx.fillStyle = css(c, on ? 0.45 : 0.18);
         ctx.fillRect(x - 1.2, Math.min(ym, Y(mean)), 2.4, Math.abs(Y(mean) - ym));
+        if (on) {
+          var qs = (mean < 0 ? '−' : '+') + Math.abs(mean).toFixed(3);
+          tag(ctx, T, d.names[i] + '  ' + qs, clamp(x, x0 + 30, x1 - 30), mean < 0 ? Y(mean) + 16 : Y(mean) - 8, { align: 'center', color: T.ink });
+        }
       }
       tag(ctx, T, '+', x0 - 8, y0 + 4, { align: 'center' });
       tag(ctx, T, '−', x0 - 8, y1 + 4, { align: 'center' });
       tag(ctx, T, 'N = ' + (S.k + 1) + ' conformer' + (S.k ? 's' : ''), x0, y0 - 12, { color: T.ink });
       tag(ctx, T, 'ABCG2  ·  MHET', 16, 24, { alpha: 0.85 });
-      tag(ctx, T, 'charge per heavy atom', x0, y1 + 18, { alpha: 0.7, size: 9.5 });
+      tag(ctx, T, 'mean charge (e)', x0, y1 + 18, { alpha: 0.7, size: 9.5 });
     }
   };
 
